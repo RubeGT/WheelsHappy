@@ -15,7 +15,7 @@ Open `http://localhost:3000`. The service creates its database tables on startup
 
 ## Deploy on Render
 
-Create a Blueprint from this repository using `render.yaml`. It provisions the Node web service and PostgreSQL database, generates `TOKEN_SECRET`, and serves both the game website and API at the service URL. Configure `ADMIN_EMAILS` as a comma-separated list of account emails if administrator access is needed.
+Create a Blueprint from this repository using `render.yaml`. It provisions the Node web service and PostgreSQL database, generates `TOKEN_SECRET`, and serves the website (including the game HTML, scripts, and assets) and API at the service URL. Open the deployed service URL to play in the browser; the game is loaded into the page's embedded game frame and its game requests use the same website host. Configure `ADMIN_EMAILS` as a comma-separated list of account emails if administrator access is needed.
 
 The browser resolves the API URL from the current website origin, so no API URL or secret needs to be embedded in the client. Set `CORS_ORIGINS` only for additional cross-origin clients; the default includes local origins and `null` for the optional Electron wrapper.
 

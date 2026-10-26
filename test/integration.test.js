@@ -66,11 +66,16 @@ async function json(response) {
 test('website, account lifecycle, file-backed catalog, legacy game loading, and access controls', async () => {
   const home = await request('/');
   assert.equal(home.status, 200);
-  assert.match(await home.text(), /id="game-frame"/);
+  const homeHtml = await home.text();
+  assert.match(homeHtml, /id="game-frame"/);
+  assert.match(homeHtml, /src="\/game\.html"/);
 
   const game = await request('/game.html');
   assert.equal(game.status, 200);
-  assert.match(await game.text(), /HW_SETTINGS/);
+  const gameHtml = await game.text();
+  assert.match(gameHtml, /HW_SETTINGS/);
+  assert.match(gameHtml, /siteURL: `\$\{window\.WHEELS_HAPPY_API_URL\}\/`/);
+  assert.doesNotMatch(gameHtml, /siteURL:.*totaljerkface\.com/);
   for (const path of [
     '/js/dependencies.ac8072eb8a22557c1b4828699b35bec7.js',
     '/js/index.js',
