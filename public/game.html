@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>Wheels Happy</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <script src="js/wheels-happy-config.js"></script>
+
+    <style>
+        html, body, #og-game-holder {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            overflow: hidden;
+            background-color: black;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #666666; 
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #CCCCCC; 
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #CCCCCC; 
+        }
+
+        /* stupid firefox */
+        html {scrollbar-color: #CCCCCC #666666; scrollbar-width: thin; background-color: black;}
+    </style>
+
+</head>
+<body oncontextmenu="return false;">
+    <script>
+        // The bundled web build expects this browser global to exist during startup.
+        window.data = null;
+
+        (function() {
+            let customLevelId = null;
+            try {
+                customLevelId = new URLSearchParams(window.location.search).get("wh_level");
+            } catch (error) {
+                console.warn("Wheels Happy level selection could not be read.", error);
+            }
+
+            window["HW_SETTINGS"] = {
+                fps: 30,
+                resolution: 2,
+                resolutionFullscreen: 2,
+                resolutionZoomIncreaseRatio: 0.5,
+                siteURL: customLevelId && /^\d+$/.test(customLevelId) ? `${window.WHEELS_HAPPY_API_URL}/` : "https://totaljerkface.com/",
+                pathPrefix: "",
+                tesselation: "tess2"
+            };
+            if (customLevelId && /^\d+$/.test(customLevelId)) {
+                window.HW_SETTINGS.level_id = Number(customLevelId);
+            }
+
+            var d_el = document.createElement("script");
+			
+            d_el.src = "js/dependencies.ac8072eb8a22557c1b4828699b35bec7.js";
+            d_el.onload = function() {
+                var i_el = document.createElement("script");
+                i_el.src = "js/index.js";
+                // i_el.integrity = "sha384-GKAptyGydgK2fCaxFPGnAip+60TiYdFsB22A5ax8TB2dqT8ockqX1XI1rsr6fJIH";
+                i_el.onload = function() {
+                    document.getElementById("loading-indicator").remove();
+                }
+
+                document.body.appendChild(i_el);
+            }
+            document.body.appendChild(d_el);
+        })();
+    </script>
+
+    <div id="og-game-holder">
+        <p style="color:white;font:16px sans-serif" id="loading-indicator">Loading Wheels Happy…</p>
+    </div>
+</body>
+</html>

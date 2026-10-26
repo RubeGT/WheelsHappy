@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: wheels-happy-backend
+    runtime: node
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TOKEN_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: wheels-happy-db
+          property: connectionString
+
+databases:
+  - name: wheels-happy-db
+    databaseName: wheels_happy
+    user: wheels_happy
