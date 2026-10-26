@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>Wheels Happy</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #111;
+      color: #f7f2df;
+    }
+    * { box-sizing: border-box; }
+    body { min-width: 320px; min-height: 100vh; margin: 0; background: #111; }
+    .topbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 20px;
+      border-bottom: 1px solid #34312b;
+      background: #171717;
+    }
+    .brand { color: #f1db63; font-size: 20px; font-weight: 800; letter-spacing: .08em; }
+    .tagline { color: #b9b3a5; font-size: 13px; }
+    main { width: min(1440px, 100%); margin: 0 auto; padding: 20px; }
+    .game-shell {
+      width: 100%;
+      height: min(78vh, 900px);
+      min-height: 480px;
+      overflow: hidden;
+      border: 1px solid #51492c;
+      border-radius: 8px;
+      background: #000;
+      box-shadow: 0 12px 44px #0008;
+    }
+    #game-frame { width: 100%; height: 100%; display: block; border: 0; background: #000; }
+    .hint { margin: 12px 2px 0; color: #9b978b; font-size: 12px; }
+    @media (max-width: 700px) {
+      .topbar { min-height: 64px; padding: 10px 14px; }
+      .brand { font-size: 17px; }
+      .tagline { display: none; }
+      main { padding: 10px; }
+      .game-shell { height: calc(100vh - 92px); min-height: 360px; border-radius: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">WHEELS HAPPY</div>
+    <div class="tagline">Browse and play featured levels</div>
+  </header>
+  <main>
+    <div class="game-shell">
+      <iframe
+        id="game-frame"
+        title="Wheels Happy game"
+        src="/game.html"
+        allow="autoplay; fullscreen; gamepad; pointer-lock"
+        allowfullscreen
+        referrerpolicy="same-origin"></iframe>
+    </div>
+    <p class="hint">Browse the levels listed in get_level.hw and load a selected level into the game.</p>
+  </main>
+  <script src="/js/wheels-happy-config.js"></script>
+  <script src="/js/wheels-happy-community.js"></script>
+</body>
+</html>
